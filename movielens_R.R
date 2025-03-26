@@ -160,53 +160,6 @@ plot(Z, breaks=c(-2, scale(seq(0.5, 5, by=0.5)), 2))
 
 sc_cutoff <- scale(seq(0.5, 5, by=0.5))+0.1651446
 
-# Lpml --------------------------------------------------------------------
-#
-# D <- 2:20
-#
-# gb_lpml <- list()
-# for(d in D){
-#
-#   set.seed(125)
-#   U <- rmnorm(n, rep(0, d), diag(1,d))
-#   V <- t(rmnorm(p, rep(0, d), diag(1,d)))
-#   R <- rmnorm(n, rep(0, d), diag(1,d))
-#   W <- t(rmnorm(p, rep(0, d), diag(1,d)))
-#
-#   V <- (V-mean(V))/sd(V)
-#   U <- (U-mean(U))/sd(U)
-#   W <- (W-mean(W))/sd(W)
-#   R <- (R-mean(R))/sd(R)
-#
-#   Mh <- 1
-#   Mf <- 1
-#   nIter <- 1000
-#   set.seed(125)
-#
-#
-#   mU <- mR <- mV <- mW <- rep(0, d)
-#
-#   gb_lpml[d] <- list(gibbs_cpo(nIter, U, R, V, W, Z, Y, sigma2, tau2, "ordinal"))
-#
-# }
-#
-# lpml <- c()
-# for(d in 2:20){
-#   lpml[d-1] <- gb_lpml[[d-1]]$lpml
-# }
-#
-# plot(lpml[complete.cases(lpml)], type="l", xaxt="n", main="Latent dimension d", ylab = "LPML")
-# axis(1, at=1:19, labels=D)
-# abline(v=which(lpml[complete.cases(lpml)]==max(lpml[complete.cases(lpml)])), col=2)
-load("lpml_movie.RData")
-par(pty="s", mar=c(5,6,4,2)+0.1)
-plot(lpml, xaxt="n", xlab="d",
-     ylab = "LPML", pch=20, main="", cex=2,
-     cex.lab=2.5, cex.axis=1.5, cex.sub=1.5, cex.main=2)
-abline(v=1:19, col="grey", lwd=1, cex=2)
-points(lpml, pch=16, cex=2)
-axis(1, at=1:19, labels=D, las=1, cex.axis=1.5)
-
 # Gibbs -------------------------------------------------------------------
 
 d = 2

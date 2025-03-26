@@ -106,47 +106,6 @@ Y <- ifelse(is.na(bin2)==T, 0, 1)*1000 + matrix(rnorm(n*p, 0 , sd=sqrt(tau2)), n
 
 sum(is.na(bin2))/(n*p)*100 # 3.371429% missing value
 
-# Lpml --------------------------------------------------------------------
-#
-# D <- 2:20
-#
-# gb_lpml <- list()
-# for(d in D){
-#
-#   set.seed(125)
-#   U <- rmnorm(n, rep(0, d), diag(1,d))
-#   V <- t(rmnorm(p, rep(0, d), diag(1,d)))
-#   R <- rmnorm(n, rep(0, d), diag(1,d))
-#   W <- t(rmnorm(p, rep(0, d), diag(1,d)))
-#
-#   Z <- (Z-mean(Z))/sd(Z)
-#   V <- (V-mean(V))/sd(V)
-#   U <- (U-mean(U))/sd(U)
-#   Y <- (Y-mean(Y))/sd(Y)
-#   W <- (W-mean(W))/sd(W)
-#   R <- (R-mean(R))/sd(R)
-#
-#   Mh <- 1
-#   Mf <- 1
-#   nIter <- 1000
-#   set.seed(125)
-#
-#
-#   mU <- mR <- mV <- mW <- rep(0, d)
-#
-#   gb_lpml[d] <- list(gibbs_cpo(nIter, U, R, V, W, Z, Y, sigma2, tau2, "binary"))
-#
-# }
-#
-# lpml <- c()
-# for(d in 2:17){
-#   lpml[d-1] <- gb_lpml[[d-1]]$lpml
-# }
-#
-# plot(lpml[complete.cases(lpml)], type="l", xaxt="n", main="Latent dimension d", ylab = "LPML")
-# axis(1, at=1:19, labels=D)
-# abline(v=which(lpml[complete.cases(lpml)]==max(lpml[complete.cases(lpml)])), col=2)
-
 # Gibbs -------------------------------------------------------------------
 
 d = 3
