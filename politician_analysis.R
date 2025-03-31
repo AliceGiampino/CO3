@@ -3,7 +3,6 @@
 
 rm(list=ls())
 gc()
-setwd("C:/Users/giamp/OneDrive/Desktop/politcs")
 
 # Libraries ---------------------------------------------------------------
 
@@ -126,14 +125,14 @@ mU <- mR <- mV <- mW <- rep(0, d)
 Mh <- 1e-5
 Mf <- 1e+5
 set.seed(125)
-nIter <- 2000
+nIter <- 5000
 gb_sen <- gibbs(nIter, U, R, V, W, Z, Y, sigma2, tau2, "binary")
 
 
 # Plots -------------------------------------------------------------------
 
 load("gb_sen.RData")
-nIter <- 1000
+nIter <- 5000
 n=100; p=35
 (row_c <- similarity_funct(n, nIter, burn = 0.5*nIter, gb_sen$partition_list, dim = 1))
 (col_c <- similarity_funct(p, nIter, burn = 0.5*nIter, gb_sen$partition_list, dim = 2))

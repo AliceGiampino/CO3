@@ -53,6 +53,8 @@ for(j in 1:ncol(df1)){
 
 df2 <- df1[,count2>45]
 sum(is.na(df2))/(nrow(df2)*ncol(df2))*100 # 18%
+# cutoff
+cutoff <- seq(0.75, 5, 0.5)
 plot(as.matrix(df2), breaks= c(0,cutoff,5.25),
      main="Movielens data", xlab="Users", ylab="Movies")
 
@@ -124,8 +126,6 @@ ggplot(ratings_count, aes(x = ratings, y = Freq)) +
 
 
 df2 <- as.matrix(df2)
-# cutoff
-cutoff <- seq(0.75, 5, 0.5)
 
 n <- nrow(df2)
 p <- ncol(df2)
@@ -178,7 +178,7 @@ mU <- mR <- mV <- mW <- rep(0, d)
 Mh <- 1e-5
 Mf <- 1e+50
 set.seed(125)
-nIter <- 5000
+nIter <- 1000
 data <- df2
 sigm2 <- 0.1
 tau2 <- 1.5
@@ -186,10 +186,7 @@ gb_movie <- gibbs(nIter, U, R, V, W, Z, Y, sigma2, tau2, "ordinal")
 
 # Plots -------------------------------------------------------------------
 
-(row_c <- similarity_funct(n, nIter, burn = 0.5*nIter, gb_movie$partition_list, dim = 1))
-(col_c <- similarity_funct(p, nIter, burn = 0.5*nIter, gb_movie$partition_list, dim = 2))
-
-assign <- row_c[[1]][3,]
+assign <- similarity_funct(n, nIter, burn = 0.5*nIter, gb_movie$partition_list, dim = 1)
 
 res <- data.frame(Id = 1:n, cluster=assign)
 
@@ -211,7 +208,7 @@ ggplot(res, aes(y = Id, axis1 = 1:n, axis2 = as.factor(cluster))) +
         legend.title=element_text(size=20),
         legend.text=element_text(size=18))
 
-cluster <- as.factor(col_c[[1]][3,])
+cluster <- as.factor(similarity_funct(p, nIter, burn = 0.5*nIter, gb_movie$partition_list, dim = 2))
 col_res <- data.frame(cluster = cluster, title = title)
 
 df_genre <- cbind(title,genre, cluster)
@@ -281,7 +278,6 @@ ggplot(res, aes(y = Id, axis1 = 1:n, axis2 = as.factor(cluster))) +
         axis.text.x = element_text(size = 20),
         legend.title=element_text(size=20),
         legend.text=element_text(size=18))
-#ggsave("row_movie_competitor.pdf", width = 18, height = 12, scale =0.8)
 
 g_col <- rowSums(bcm$P%*%diag(c(4,2,1,3)))
 

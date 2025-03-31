@@ -1103,49 +1103,49 @@ similarity_funct <- function(N, niter, burn = 0, partition_list, dim = 1){
   psm<-comp.psm(PARTITION)
   data.VI=minVI(psm,PARTITION,method=("all"),include.greedy=FALSE)
   optimal_clustering<-data.VI$cl[3,]
-
-  # SIMILARITY PLOT
-
-  reorder_mat <- function(mat) {
-    dd <- as.dist((1 - mat) / 2)
-    hc <- hclust(dd)
-    mat <- mat[hc$order, hc$order]
-  }
-
-  # Get upper triangle of the correlation matrix
-  get_upper_tri <- function(mat) {
-    mat[lower.tri(mat)] <- NA
-    return(mat)
-  }
-  psm <- reorder_mat(psm)
-  upper_tri <- get_upper_tri(psm)
-  melted_cormat <- melt(upper_tri, na.rm = TRUE)
-  colnames(melted_cormat) <- c("Var1", "Var2", "value")
-  gg <- ggplot(melted_cormat, aes(Var2, Var1, fill = value)) +
-    geom_tile(color = "white") +
-    scale_fill_viridis(option = "viridis", name = "Posterior\nsimilarity", direction=-1, na.value = "white", limits = c(0.00 ,1.00)) +
-    theme_minimal() +
-    coord_fixed() +
-    theme(
-      axis.title.x = element_blank(),
-      axis.title.y = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.border = element_blank(),
-      panel.background = element_blank(),
-      axis.ticks = element_blank(),
-      legend.justification = c(1, 0),
-      legend.position = c(0.6, 0.7),
-      legend.direction = "horizontal"
-    ) +
-    guides(fill = guide_colorbar(
-      barwidth = 7,
-      barheight = 1,
-      title.position = "top",
-      title.hjust = 0.5
-    ))
-
-  print(gg)
-  return(list(data.VI$cl, summary(data.VI)))
+#
+#   # SIMILARITY PLOT
+#
+#   reorder_mat <- function(mat) {
+#     dd <- as.dist((1 - mat) / 2)
+#     hc <- hclust(dd)
+#     mat <- mat[hc$order, hc$order]
+#   }
+#
+#   # Get upper triangle of the correlation matrix
+#   get_upper_tri <- function(mat) {
+#     mat[lower.tri(mat)] <- NA
+#     return(mat)
+#   }
+#   psm <- reorder_mat(psm)
+#   upper_tri <- get_upper_tri(psm)
+#   melted_cormat <- melt(upper_tri, na.rm = TRUE)
+#   colnames(melted_cormat) <- c("Var1", "Var2", "value")
+#   gg <- ggplot(melted_cormat, aes(Var2, Var1, fill = value)) +
+#     geom_tile(color = "white") +
+#     scale_fill_viridis(option = "viridis", name = "Posterior\nsimilarity", direction=-1, na.value = "white", limits = c(0.00 ,1.00)) +
+#     theme_minimal() +
+#     coord_fixed() +
+#     theme(
+#       axis.title.x = element_blank(),
+#       axis.title.y = element_blank(),
+#       panel.grid.major = element_blank(),
+#       panel.border = element_blank(),
+#       panel.background = element_blank(),
+#       axis.ticks = element_blank(),
+#       legend.justification = c(1, 0),
+#       legend.position = c(0.6, 0.7),
+#       legend.direction = "horizontal"
+#     ) +
+#     guides(fill = guide_colorbar(
+#       barwidth = 7,
+#       barheight = 1,
+#       title.position = "top",
+#       title.hjust = 0.5
+#     ))
+#
+#   print(gg)
+  return(optimal_clustering)
 
 }
 
