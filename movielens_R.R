@@ -178,7 +178,7 @@ mU <- mR <- mV <- mW <- rep(0, d)
 Mh <- 1e-5
 Mf <- 1e+50
 set.seed(125)
-nIter <- 1000
+nIter <- 5000
 data <- df2
 sigm2 <- 0.1
 tau2 <- 1.5
