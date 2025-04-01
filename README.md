@@ -8,5 +8,5 @@ politicians' votes application: the data are obtained from voteview.com, politic
 Please, be careful of the change in notation:
 Z corresponds to Z
 Y corresponds to W
-U and R correspond to $\bm theta_1$
-V and W correspond to $\bm theta_2$
+U and R correspond to $\boldsymbol{\theta}_1$
+V and W correspond to $\boldsymbol{\theta}_2$
